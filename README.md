@@ -1,4 +1,4 @@
-<!-- GitAds-Verify: PLACEHOLDER_VERIFY_CODE -->
+<!-- GitAds-Verify: 9G9W8LZU1KFUPIKJT5C1CK99DVO82OXA -->
 
 # 🚨 Deploy-or-Regret
 
