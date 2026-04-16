@@ -1,0 +1,17 @@
+[
+  { "id": "friday", "name": "Friday Deploy", "weight": 30, "description": "Deploying on Friday is a cry for help." },
+  { "id": "weekend", "name": "Weekend Deploy", "weight": 20, "description": "You're working weekends? That's the real incident." },
+  { "id": "monday", "name": "Monday Deploy", "weight": 15, "description": "Monday deploys: testing fate when you're least prepared." },
+  { "id": "before-coffee", "name": "Pre-Coffee Deploy", "weight": 10, "description": "Deploying before your first coffee is clinical insanity." },
+  { "id": "lunch-deploy", "name": "Lunch Hour Deploy", "weight": 15, "description": "Post-lunch deploys: fueled by false confidence and carbs." },
+  { "id": "end-of-day", "name": "End of Day Deploy", "weight": 25, "description": "Deploying at 4 PM means debugging at 7 PM." },
+  { "id": "after-hours", "name": "After Hours Deploy", "weight": 35, "description": "After 5 PM, every deploy is a personal choice with professional consequences." },
+  { "id": "friday-13th", "name": "Friday the 13th", "weight": 30, "description": "Statistically fine. Psychologically devastating." },
+  { "id": "holiday-freeze", "name": "Holiday Freeze", "weight": 50, "description": "The code freeze exists to protect you from yourself." },
+  { "id": "quarter-end", "name": "Quarter End", "weight": 25, "description": "Finance is running reports. Don't give them new numbers to explain." },
+  { "id": "april-fools", "name": "April Fools Day", "weight": 20, "description": "Nobody will believe the incident report." },
+  { "id": "large-diff", "name": "Large Changeset", "weight": 20, "description": "The bigger the diff, the bigger the boom." },
+  { "id": "no-tests", "name": "Missing Tests", "weight": 25, "description": "No tests? That's not confidence, that's denial." },
+  { "id": "solo-approver", "name": "Self-Approved PR", "weight": 15, "description": "Reviewing your own code is like grading your own exam." },
+  { "id": "new-dependency", "name": "New Dependency", "weight": 10, "description": "Every new package is a trust fall with the open-source community." }
+]

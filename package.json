@@ -1,0 +1,35 @@
+{
+  "name": "deploy-or-regret",
+  "version": "1.0.0",
+  "description": "An over-engineered decision engine for the most important question in DevOps. Should I deploy? Probably not.",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "node --watch src/app.js",
+    "test": "jest --verbose",
+    "lint": "eslint src/ api/ test/"
+  },
+  "keywords": [
+    "deploy",
+    "devops",
+    "api",
+    "developer-humor",
+    "friday-deploy",
+    "expressjs"
+  ],
+  "author": "atryx",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.0.0",
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

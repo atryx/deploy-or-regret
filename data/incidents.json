@@ -1,0 +1,352 @@
+[
+  {
+    "title": "GitLab Deletes Production Database (2017)",
+    "summary": "An engineer accidentally ran rm -rf on the production database directory during routine maintenance. 300GB of data lost, with only a 6-hour-old backup available.",
+    "lesson": "Always double-check which terminal you're typing in.",
+    "year": 2017,
+    "severity": "catastrophic"
+  },
+  {
+    "title": "Amazon S3 Outage (2017)",
+    "summary": "A typo in a command during routine debugging took down a massive portion of S3 in us-east-1, cascading across the internet. Countless services went offline.",
+    "lesson": "One region to rule them all is not a resilience strategy.",
+    "year": 2017,
+    "severity": "catastrophic"
+  },
+  {
+    "title": "Knight Capital Trading Glitch (2012)",
+    "summary": "A deployment error activated old test code on Knight Capital's trading servers, causing the firm to lose $440 million in 45 minutes.",
+    "lesson": "Clean up dead code. It might not be as dead as you think.",
+    "year": 2012,
+    "severity": "catastrophic"
+  },
+  {
+    "title": "Facebook Global Outage (2021)",
+    "summary": "A routine BGP maintenance command withdrew Facebook's DNS routes, taking down Facebook, Instagram, and WhatsApp for over 6 hours worldwide.",
+    "lesson": "Don't lock yourself out of the building while doing maintenance on the locks.",
+    "year": 2021,
+    "severity": "catastrophic"
+  },
+  {
+    "title": "Cloudflare Regex Outage (2019)",
+    "summary": "A single regex rule deployed to all Cloudflare edge servers caused CPU spikes to 100%, taking down millions of websites for 27 minutes.",
+    "lesson": "Regex is a superpower. And like all superpowers, it can destroy the world.",
+    "year": 2019,
+    "severity": "major"
+  },
+  {
+    "title": "CrowdStrike Blue Screen Apocalypse (2024)",
+    "summary": "A faulty content update to CrowdStrike Falcon caused millions of Windows machines worldwide to enter a boot loop, grounding flights and halting hospitals.",
+    "lesson": "Kernel-level code deserves kernel-level testing.",
+    "year": 2024,
+    "severity": "catastrophic"
+  },
+  {
+    "title": "GitHub Universe of 500 Errors (2018)",
+    "summary": "A network partition during a database migration caused GitHub to be down or degraded for over 24 hours, affecting millions of developers.",
+    "lesson": "Database migrations and network partitions: a love story that always ends badly.",
+    "year": 2018,
+    "severity": "major"
+  },
+  {
+    "title": "NPM Left-Pad Incident (2016)",
+    "summary": "A developer unpublished an 11-line npm package called left-pad, breaking thousands of builds including React, Babel, and more.",
+    "lesson": "Your 11-line utility might be holding the internet together.",
+    "year": 2016,
+    "severity": "major"
+  },
+  {
+    "title": "Roblox 73-Hour Outage (2021)",
+    "summary": "A subtle bug in Roblox's internal service discovery (related to HashiCorp Consul) caused a cascading failure that took the platform offline for 73 hours.",
+    "lesson": "Service meshes can turn a small fire into a wildfire.",
+    "year": 2021,
+    "severity": "catastrophic"
+  },
+  {
+    "title": "Fastly CDN Global Outage (2021)",
+    "summary": "A single customer configuration change triggered a latent bug in Fastly's software, knocking major websites offline for about an hour.",
+    "lesson": "One customer's config change can be the internet's config change.",
+    "year": 2021,
+    "severity": "major"
+  },
+  {
+    "title": "Google Cloud Networking Outage (2019)",
+    "summary": "A configuration change intended for a small number of servers was applied globally, causing severe network congestion across multiple Google Cloud regions.",
+    "lesson": "Blast radius should be measured before pressing enter.",
+    "year": 2019,
+    "severity": "major"
+  },
+  {
+    "title": "British Airways IT Meltdown (2017)",
+    "summary": "A power supply issue at a data center was compounded by an uncontrolled restart, grounding all flights for days and costing over £100M.",
+    "lesson": "Your disaster recovery plan should survive its first contact with an actual disaster.",
+    "year": 2017,
+    "severity": "catastrophic"
+  },
+  {
+    "title": "Slack's Database Migration Surprise (2022)",
+    "summary": "A routine database migration at Slack caused unexpected locking, leading to degraded service during peak work hours.",
+    "lesson": "Migrate databases like you defuse bombs: carefully and during off-hours.",
+    "year": 2022,
+    "severity": "moderate"
+  },
+  {
+    "title": "Azure DNS Global Outage (2021)",
+    "summary": "An update to Azure DNS triggered a cascading failure affecting Azure services globally, including Teams, Xbox Live, and the Azure Portal itself.",
+    "lesson": "DNS is always the answer. And sometimes the problem.",
+    "year": 2021,
+    "severity": "major"
+  },
+  {
+    "title": "Heroku Security Incident (2022)",
+    "summary": "Attackers accessed Heroku's GitHub integration OAuth tokens, forcing a revocation that broke thousands of CI/CD pipelines overnight.",
+    "lesson": "Supply chain security: because your deploy depends on everyone else's security too.",
+    "year": 2022,
+    "severity": "major"
+  },
+  {
+    "title": "Travis CI Secret Exposure (2021)",
+    "summary": "A vulnerability in Travis CI exposed secrets from public repositories, including signing keys and access tokens from major open-source projects.",
+    "lesson": "Your CI/CD pipeline is a vault. Treat it like one.",
+    "year": 2021,
+    "severity": "major"
+  },
+  {
+    "title": "Tesla Firmware Bricking (2020)",
+    "summary": "A firmware update caused a fleet of Tesla vehicles to display errors and lose functionality, requiring service center visits to fix.",
+    "lesson": "OTA updates for cars: because bricking phones wasn't exciting enough.",
+    "year": 2020,
+    "severity": "moderate"
+  },
+  {
+    "title": "Spotify's Leap Second Crash (2012)",
+    "summary": "The Linux kernel's handling of a leap second caused high CPU usage across Spotify's servers, leading to a multi-hour outage.",
+    "lesson": "Time is an illusion. Leap seconds are a hostile illusion.",
+    "year": 2012,
+    "severity": "moderate"
+  },
+  {
+    "title": "AWS DynamoDB Outage (2015)",
+    "summary": "A metadata partition in DynamoDB became overloaded, causing cascading failures across us-east-1 that affected Netflix, Reddit, and others.",
+    "lesson": "Metadata about your data can be more dangerous than the data itself.",
+    "year": 2015,
+    "severity": "major"
+  },
+  {
+    "title": "CircleCI Security Breach (2023)",
+    "summary": "CircleCI urged all customers to rotate their secrets after discovering unauthorized access to customer data, disrupting CI/CD pipelines worldwide.",
+    "lesson": "Rotate your secrets regularly, or someone else will rotate your weekend plans.",
+    "year": 2023,
+    "severity": "major"
+  },
+  {
+    "title": "The Y2K Deploy That Actually Broke (2000)",
+    "summary": "A financial institution's Y2K remediation patch introduced a new bug that miscalculated interest for the first week of January 2000.",
+    "lesson": "The fix for the bug is often the source of the next bug.",
+    "year": 2000,
+    "severity": "moderate"
+  },
+  {
+    "title": "Etsy's 2-Hour Homepage Blank (2014)",
+    "summary": "A deploy removed a critical template file, turning Etsy's homepage into a blank white page for two hours during peak shopping.",
+    "lesson": "Smoke tests exist for a reason. Use them.",
+    "year": 2014,
+    "severity": "moderate"
+  },
+  {
+    "title": "Twitter's Fail Whale Era (2008-2012)",
+    "summary": "Twitter's rapid growth outpaced its Ruby on Rails infrastructure, causing frequent outages memorialized by the famous Fail Whale error page.",
+    "lesson": "Scaling is not a tomorrow problem. It's a yesterday problem you ignored.",
+    "year": 2010,
+    "severity": "moderate"
+  },
+  {
+    "title": "Valve Steam Store Caching Disaster (2015)",
+    "summary": "A caching misconfiguration on Christmas Day caused Steam users to see other users' account details, including purchase history and partial payment info.",
+    "lesson": "Cache invalidation and deploying on Christmas: two of the hardest problems.",
+    "year": 2015,
+    "severity": "major"
+  },
+  {
+    "title": "Atlassian Cloud Deletion (2022)",
+    "summary": "An internal maintenance script accidentally deleted data for approximately 400 customers, taking up to two weeks to fully restore.",
+    "lesson": "Deletion scripts should have more safety checks than a nuclear launch.",
+    "year": 2022,
+    "severity": "catastrophic"
+  },
+  {
+    "title": "The MongoDB Default Config Apocalypse (2017)",
+    "summary": "Thousands of MongoDB instances were wiped by attackers exploiting the default configuration that required no authentication.",
+    "lesson": "Defaults matter. Especially the ones that leave the door unlocked.",
+    "year": 2017,
+    "severity": "catastrophic"
+  },
+  {
+    "title": "Dark Souls Servers Permanently Offline (2022)",
+    "summary": "A remote code execution vulnerability in Dark Souls multiplayer servers forced FromSoftware to take PC servers offline indefinitely.",
+    "lesson": "Player-to-player connections can also be attacker-to-server connections.",
+    "year": 2022,
+    "severity": "major"
+  },
+  {
+    "title": "OVHcloud Data Center Fire (2021)",
+    "summary": "A fire at OVHcloud's Strasbourg data center destroyed servers hosting millions of websites, with some customers losing all their data permanently.",
+    "lesson": "Cloud doesn't mean fireproof. Have off-site backups. Real off-site.",
+    "year": 2021,
+    "severity": "catastrophic"
+  },
+  {
+    "title": "Zoom's Monday Morning Outage (2020)",
+    "summary": "Zoom went down on the first Monday of the school year as millions tried to log in simultaneously for remote learning.",
+    "lesson": "Load testing should simulate your worst Monday, not your best Tuesday.",
+    "year": 2020,
+    "severity": "major"
+  },
+  {
+    "title": "Let's Encrypt Certificate Revocation (2020)",
+    "summary": "Let's Encrypt had to revoke over 3 million certificates due to a bug in their CAA checking code, causing mass HTTPS disruption.",
+    "lesson": "Certificate authorities: because breaking HTTPS at scale requires trust.",
+    "year": 2020,
+    "severity": "major"
+  },
+  {
+    "title": "Samsung Galaxy Note 7 OTA Recall (2016)",
+    "summary": "Samsung pushed firmware updates trying to fix battery issues that were causing phones to catch fire, eventually recalling the entire product line.",
+    "lesson": "Some bugs can't be fixed with a software update.",
+    "year": 2016,
+    "severity": "catastrophic"
+  },
+  {
+    "title": "The Log4Shell Zero-Day (2021)",
+    "summary": "A critical RCE vulnerability in Log4j (CVE-2021-44228) affected virtually every Java application, causing a worldwide scramble to patch.",
+    "lesson": "Your logging library should log events, not execute arbitrary code.",
+    "year": 2021,
+    "severity": "catastrophic"
+  },
+  {
+    "title": "Snapchat's Redesign Deployment (2018)",
+    "summary": "Snapchat rolled out a widely hated redesign that caused a petition with 1.2 million signatures and a permanent loss of daily active users.",
+    "lesson": "Sometimes the riskiest deploy is the one that works exactly as planned.",
+    "year": 2018,
+    "severity": "major"
+  },
+  {
+    "title": "Apple Maps Launch (2012)",
+    "summary": "Apple's replacement of Google Maps with its own Maps app was so buggy that Tim Cook publicly apologized and recommended competitors.",
+    "lesson": "Shipping on time means nothing if it ships you off a bridge.",
+    "year": 2012,
+    "severity": "major"
+  },
+  {
+    "title": "Healthcare.gov Launch Disaster (2013)",
+    "summary": "The U.S. healthcare marketplace website crashed on launch day and remained barely functional for months, handling only a fraction of expected traffic.",
+    "lesson": "Load test with the actual expected load, not 1% of it.",
+    "year": 2013,
+    "severity": "catastrophic"
+  },
+  {
+    "title": "Twitter's Elon Era Migration Outage (2023)",
+    "summary": "Aggressive infrastructure changes at Twitter caused intermittent outages and rate limiting that affected millions of users.",
+    "lesson": "Moving fast and breaking things is a strategy. It's just not a good one.",
+    "year": 2023,
+    "severity": "major"
+  },
+  {
+    "title": "Dropbox Accidentally Unlocks All Accounts (2011)",
+    "summary": "A code update removed authentication checks for 4 hours, allowing anyone to access any Dropbox account with any password.",
+    "lesson": "Auth bypass bugs: because who needs passwords anyway?",
+    "year": 2011,
+    "severity": "catastrophic"
+  },
+  {
+    "title": "MySpace Data Loss (2019)",
+    "summary": "MySpace lost 12 years of user-uploaded music (approximately 50 million songs) during a server migration gone wrong.",
+    "lesson": "If the migration plan doesn't include backups, it's not a plan. It's a prayer.",
+    "year": 2019,
+    "severity": "catastrophic"
+  },
+  {
+    "title": "Datadog's Agent Update Crash (2023)",
+    "summary": "A Datadog agent update caused high CPU usage across customer infrastructure, ironically degrading the systems it was supposed to monitor.",
+    "lesson": "The monitoring tool should not become the thing being monitored.",
+    "year": 2023,
+    "severity": "moderate"
+  },
+  {
+    "title": "Sonos Bricking Update (2020)",
+    "summary": "A Sonos app update rendered older speakers unusable, forcing customers to either upgrade or lose multi-room audio functionality.",
+    "lesson": "Planned obsolescence via software update is still planned obsolescence.",
+    "year": 2020,
+    "severity": "moderate"
+  },
+  {
+    "title": "Toyota Unintended Acceleration (2009-2011)",
+    "summary": "Software defects in Toyota's engine control systems contributed to unintended acceleration incidents, leading to massive recalls and congressional hearings.",
+    "lesson": "When your software controls a 2-ton vehicle, testing is not optional.",
+    "year": 2010,
+    "severity": "catastrophic"
+  },
+  {
+    "title": "Reddit's Great Configuration Migration (2023)",
+    "summary": "A Kubernetes migration at Reddit caused intermittent outages during peak hours as services were moved between clusters.",
+    "lesson": "Kubernetes migrations: because regular migrations weren't stressful enough.",
+    "year": 2023,
+    "severity": "moderate"
+  },
+  {
+    "title": "Notion's 3-Hour Outage (2023)",
+    "summary": "A database issue at Notion caused the app to be inaccessible for 3 hours, leaving teams unable to access their documentation.",
+    "lesson": "When your docs platform goes down, nobody knows the runbook to bring it back up.",
+    "year": 2023,
+    "severity": "moderate"
+  },
+  {
+    "title": "WhatsApp's New Year Crash (2018)",
+    "summary": "WhatsApp servers crashed under the load of New Year's messages, leaving billions unable to send midnight greetings.",
+    "lesson": "If you know the traffic spike is coming, prepare for it. It comes every year.",
+    "year": 2018,
+    "severity": "major"
+  },
+  {
+    "title": "Linus Torvalds Breaks Git Merge (2022)",
+    "summary": "A kernel merge window resulted in a broken build that took a day to diagnose, proving even Linus can have a bad merge day.",
+    "lesson": "If Linus can break a build, so can you. Don't feel bad. Feel prepared.",
+    "year": 2022,
+    "severity": "moderate"
+  },
+  {
+    "title": "AWS ap-southeast-2 Power Event (2023)",
+    "summary": "A power event in AWS Sydney region caused multi-hour outages for EC2, RDS, and related services affecting Australian businesses.",
+    "lesson": "Multi-AZ doesn't help when the power company has other plans.",
+    "year": 2023,
+    "severity": "major"
+  },
+  {
+    "title": "The DNS Change That Split the Internet (2016)",
+    "summary": "A DDoS attack on DNS provider Dyn took down Twitter, Netflix, Reddit, and others by targeting a single point of failure in DNS resolution.",
+    "lesson": "DNS is always the single point of failure you forgot about.",
+    "year": 2016,
+    "severity": "catastrophic"
+  },
+  {
+    "title": "Windows 10 Update Deletes User Files (2018)",
+    "summary": "The Windows 10 October 2018 Update deleted users' Documents folder contents, forcing Microsoft to pull the update entirely.",
+    "lesson": "Never delete user data. Especially when they didn't ask you to.",
+    "year": 2018,
+    "severity": "catastrophic"
+  },
+  {
+    "title": "Pokemon GO Launch Day (2016)",
+    "summary": "Pokemon GO's server infrastructure was overwhelmed on launch day, with load 50x the expected maximum, causing days of intermittent outages.",
+    "lesson": "When your game makes people walk outside, your servers need to keep up.",
+    "year": 2016,
+    "severity": "major"
+  },
+  {
+    "title": "Robinhood Leap Day Outage (2020)",
+    "summary": "Robinhood's trading platform went down on a Monday after leap day due to a date-handling bug, during a historic market rally.",
+    "lesson": "Leap years happen every 4 years. Test for them every year.",
+    "year": 2020,
+    "severity": "major"
+  }
+]
