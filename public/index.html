@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deploy or Regret — Should I Deploy?</title>
+  <meta name="description" content="An over-engineered decision engine for the most important question in DevOps. Should I deploy? Probably not.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚨</text></svg>">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: #0a0a0a;
+      color: #e0e0e0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 680px;
+      width: 100%;
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+
+    h1 { font-size: 2.5rem; margin-bottom: 0.3rem; letter-spacing: -1px; }
+    .tagline { color: #888; font-size: 1rem; margin-bottom: 2.5rem; }
+
+    .deploy-btn {
+      background: linear-gradient(135deg, #e05d44, #ff6b6b);
+      color: white;
+      border: none;
+      padding: 1.2rem 3rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+      border-radius: 16px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 24px rgba(224, 93, 68, 0.3);
+      letter-spacing: 0.5px;
+    }
+
+    .deploy-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 32px rgba(224, 93, 68, 0.5);
+    }
+
+    .deploy-btn:active { transform: translateY(0); }
+    .deploy-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+    .deploy-btn .spinner {
+      display: none;
+      width: 20px; height: 20px;
+      border: 3px solid rgba(255,255,255,0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+
+    .deploy-btn.loading .spinner { display: inline-block; }
+    .deploy-btn.loading .btn-text { opacity: 0.7; }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .tz-info { margin-top: 1rem; font-size: 0.85rem; color: #666; }
+
+    .result {
+      display: none;
+      margin-top: 2.5rem;
+      text-align: left;
+      animation: slideUp 0.4s ease;
+    }
+    .result.visible { display: block; }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .gauge-container { text-align: center; margin-bottom: 2rem; }
+
+    .gauge-ring {
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      margin: 0 auto 1rem;
+      display: flex; align-items: center; justify-content: center; flex-direction: column;
+      position: relative;
+      transition: all 0.5s ease;
+    }
+
+    .gauge-ring::before {
+      content: '';
+      position: absolute; inset: 6px;
+      border-radius: 50%;
+      background: #0a0a0a;
+    }
+
+    .gauge-score { position: relative; font-size: 3.5rem; font-weight: 800; z-index: 1; }
+    .gauge-label { position: relative; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; z-index: 1; }
+
+    .verdict-text { font-size: 1.6rem; font-weight: 700; text-align: center; margin-bottom: 0.5rem; }
+    .verdict-yes { color: #4c1; }
+    .verdict-no { color: #e05d44; }
+
+    .reason-card {
+      background: #151515; border: 1px solid #252525;
+      border-radius: 12px; padding: 1.2rem 1.5rem; margin-bottom: 1rem;
+    }
+    .reason-card h3 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; color: #666; margin-bottom: 0.5rem; }
+    .reason-card p { font-size: 1.05rem; line-height: 1.5; color: #ccc; }
+
+    .factors { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; justify-content: center; }
+    .factor-tag {
+      background: #1a1a2e; border: 1px solid #2a2a4e;
+      padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; color: #8888cc;
+    }
+
+    .incident-card {
+      background: linear-gradient(135deg, #1a1010, #151515); border: 1px solid #332222;
+      border-radius: 12px; padding: 1.2rem 1.5rem; margin-bottom: 1rem;
+    }
+    .incident-card h3 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; color: #cc6666; margin-bottom: 0.5rem; }
+    .incident-card .incident-title { font-weight: 700; font-size: 1rem; color: #e0c0c0; margin-bottom: 0.3rem; }
+    .incident-card .incident-summary { font-size: 0.9rem; color: #999; line-height: 1.4; margin-bottom: 0.5rem; }
+    .incident-card .incident-lesson { font-size: 0.85rem; color: #cc9966; font-style: italic; }
+
+    .advice-card {
+      background: #101a10; border: 1px solid #223322;
+      border-radius: 12px; padding: 1.2rem 1.5rem; margin-bottom: 1.5rem; text-align: center;
+    }
+    .advice-card p { font-size: 1.1rem; color: #88cc88; font-weight: 600; }
+
+    .try-again-btn {
+      background: transparent; border: 2px solid #333; color: #888;
+      padding: 0.6rem 1.5rem; font-size: 0.95rem; border-radius: 10px;
+      cursor: pointer; transition: all 0.2s; display: block; margin: 0 auto;
+    }
+    .try-again-btn:hover { border-color: #555; color: #ccc; }
+
+    .footer { margin-top: 3rem; padding: 1.5rem; text-align: center; color: #444; font-size: 0.8rem; }
+    .footer a { color: #666; text-decoration: none; }
+    .footer a:hover { color: #999; }
+
+    .risk-low .gauge-ring { background: conic-gradient(#4c1 0%, #4c1 var(--pct), #222 var(--pct)); }
+    .risk-low .gauge-score, .risk-low .gauge-label { color: #4c1; }
+    .risk-moderate .gauge-ring { background: conic-gradient(#dfb317 0%, #dfb317 var(--pct), #222 var(--pct)); }
+    .risk-moderate .gauge-score, .risk-moderate .gauge-label { color: #dfb317; }
+    .risk-high .gauge-ring { background: conic-gradient(#fe7d37 0%, #fe7d37 var(--pct), #222 var(--pct)); }
+    .risk-high .gauge-score, .risk-high .gauge-label { color: #fe7d37; }
+    .risk-critical .gauge-ring { background: conic-gradient(#e05d44 0%, #e05d44 var(--pct), #222 var(--pct)); }
+    .risk-critical .gauge-score, .risk-critical .gauge-label { color: #e05d44; }
+
+    @media (max-width: 500px) {
+      h1 { font-size: 1.8rem; }
+      .deploy-btn { font-size: 1.2rem; padding: 1rem 2rem; }
+      .gauge-ring { width: 160px; height: 160px; }
+      .gauge-score { font-size: 2.8rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🚨 Should I Deploy?</h1>
+    <p class="tagline">An over-engineered decision engine for the most important question in DevOps.</p>
+
+    <button class="deploy-btn" id="deployBtn" onclick="checkDeploy()">
+      <span class="spinner"></span>
+      <span class="btn-text">Should I Deploy?</span>
+    </button>
+    <p class="tz-info" id="tzInfo"></p>
+
+    <div class="result" id="result">
+      <div class="gauge-container" id="gaugeContainer">
+        <div class="gauge-ring" id="gaugeRing">
+          <span class="gauge-score" id="gaugeScore">0</span>
+          <span class="gauge-label" id="gaugeLabel">—</span>
+        </div>
+        <p class="verdict-text" id="verdictText"></p>
+      </div>
+
+      <div class="factors" id="factors"></div>
+
+      <div class="reason-card">
+        <h3>💬 The Verdict</h3>
+        <p id="reasonText"></p>
+      </div>
+
+      <div class="advice-card">
+        <p id="adviceText"></p>
+      </div>
+
+      <div class="incident-card">
+        <h3>📜 Deployment Disaster of the Day</h3>
+        <p class="incident-title" id="incidentTitle"></p>
+        <p class="incident-summary" id="incidentSummary"></p>
+        <p class="incident-lesson" id="incidentLesson"></p>
+      </div>
+
+      <button class="try-again-btn" onclick="checkDeploy()">🎲 Roll Again</button>
+    </div>
+
+    <div class="footer">
+      <p>Built with deployment anxiety by <a href="https://github.com/atryx">atryx</a></p>
+      <p style="margin-top:0.3rem"><a href="https://github.com/atryx/deploy-or-regret">⭐ Star on GitHub</a> · <a href="/deploy">API</a> · <a href="/deploy/badge">Badge</a></p>
+    </div>
+  </div>
+
+  <script>
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    document.getElementById('tzInfo').textContent = '\u{1F4CD} Detected timezone: ' + tz;
+
+    async function checkDeploy() {
+      const btn = document.getElementById('deployBtn');
+      const result = document.getElementById('result');
+      btn.classList.add('loading');
+      btn.disabled = true;
+
+      try {
+        const res = await fetch('/deploy?tz=' + encodeURIComponent(tz));
+        const data = await res.json();
+
+        const pct = Math.min(data.score, 100);
+        const container = document.getElementById('gaugeContainer');
+        container.className = 'gauge-container risk-' + data.riskLevel.toLowerCase();
+        document.getElementById('gaugeRing').style.setProperty('--pct', pct + '%');
+        document.getElementById('gaugeScore').textContent = data.score;
+        document.getElementById('gaugeLabel').textContent = data.riskLevel;
+
+        var verdictEl = document.getElementById('verdictText');
+        if (data.shouldDeploy) {
+          verdictEl.textContent = '\u2705 Ship it!';
+          verdictEl.className = 'verdict-text verdict-yes';
+        } else {
+          verdictEl.textContent = '\u274C Step away from the keyboard.';
+          verdictEl.className = 'verdict-text verdict-no';
+        }
+
+        document.getElementById('factors').innerHTML = data.factors.map(function(f) {
+          return '<span class="factor-tag">' + f + '</span>';
+        }).join('');
+
+        document.getElementById('reasonText').textContent = data.reason;
+        document.getElementById('adviceText').textContent = data.advice;
+        document.getElementById('incidentTitle').textContent = data.incident.title;
+        document.getElementById('incidentSummary').textContent = data.incident.summary;
+        document.getElementById('incidentLesson').textContent = '\u{1F4A1} Lesson: ' + data.incident.lesson;
+
+        result.classList.add('visible');
+      } catch (err) {
+        alert('Failed to assess risk. The API might be down. Ironic.');
+      } finally {
+        btn.classList.remove('loading');
+        btn.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>

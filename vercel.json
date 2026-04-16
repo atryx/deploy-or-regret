@@ -1,9 +1,14 @@
 {
   "version": 2,
   "builds": [
-    { "src": "api/index.js", "use": "@vercel/node" }
+    { "src": "api/index.js", "use": "@vercel/node" },
+    { "src": "public/**", "use": "@vercel/static" }
   ],
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/api" }
+  "routes": [
+    { "src": "/deploy.*", "dest": "/api" },
+    { "src": "/incidents/(.*)", "dest": "/api" },
+    { "src": "/health", "dest": "/api" },
+    { "src": "/meta", "dest": "/api" },
+    { "src": "/(.*)", "dest": "/public/$1" }
   ]
 }

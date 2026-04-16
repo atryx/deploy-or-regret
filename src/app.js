@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
@@ -11,6 +12,9 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+// Serve frontend
+app.use(express.static(path.join(__dirname, '..', 'public')));
 
 const limiter = rateLimit({
   windowMs: 60 * 1000,
@@ -62,7 +66,7 @@ app.get('/meta', (_req, res) => {
   });
 });
 
-// 404 handler
+// 404 handler for API-like requests
 app.use((_req, res) => {
   res.status(404).json({
     error: 'Not found. Try GET /deploy, GET /deploy/badge, GET /incidents/random, GET /health, or GET /meta',
