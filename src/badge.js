@@ -5,10 +5,14 @@ const COLORS = {
   CRITICAL: '#e05d44',
 };
 
+function escapeXml(str) {
+  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
+}
+
 function generateBadge(riskLevel) {
   const color = COLORS[riskLevel] || COLORS.MODERATE;
   const label = 'Deploy Risk';
-  const value = riskLevel;
+  const value = escapeXml(riskLevel);
   const labelWidth = 76;
   const valueWidth = riskLevel === 'MODERATE' ? 78 : riskLevel === 'CRITICAL' ? 68 : 42;
   const totalWidth = labelWidth + valueWidth;

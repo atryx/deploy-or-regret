@@ -1,7 +1,6 @@
 const path = require('path');
 const express = require('express');
 const cors = require('cors');
-const rateLimit = require('express-rate-limit');
 const { assessRisk, RISK_LEVELS } = require('./risk-engine');
 const { generateBadge } = require('./badge');
 const { pickRandom } = require('./utils');
@@ -16,15 +15,6 @@ app.use(express.json());
 // Serve frontend
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
-const limiter = rateLimit({
-  windowMs: 60 * 1000,
-  max: 120,
-  standardHeaders: true,
-  legacyHeaders: false,
-  message: { error: 'Too many requests. Limit: 120 per minute.' },
-});
-app.use(limiter);
-
 app.get('/deploy', (req, res) => {
   const { tz } = req.query;
 
@@ -32,7 +22,7 @@ app.get('/deploy', (req, res) => {
     const result = assessRisk(tz);
     res.json(result);
   } catch (err) {
-    res.status(400).json({ error: `Invalid timezone '${tz}'.` });
+    res.status(400).json({ error: 'Invalid timezone provided.' });
   }
 });
 
@@ -46,7 +36,7 @@ app.get('/deploy/badge', (req, res) => {
     res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
     res.send(svg);
   } catch (err) {
-    res.status(400).json({ error: `Invalid timezone '${tz}'.` });
+    res.status(400).json({ error: 'Invalid timezone provided.' });
   }
 });
 

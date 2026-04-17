@@ -1,4 +1,7 @@
 function pickRandom(arr) {
+  if (!arr || arr.length === 0) {
+    throw new Error('pickRandom called with empty array');
+  }
   return arr[Math.floor(Math.random() * arr.length)];
 }
 

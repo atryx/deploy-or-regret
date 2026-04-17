@@ -241,9 +241,14 @@
           verdictEl.className = 'verdict-text verdict-no';
         }
 
-        document.getElementById('factors').innerHTML = data.factors.map(function(f) {
-          return '<span class="factor-tag">' + f + '</span>';
-        }).join('');
+        var factorsEl = document.getElementById('factors');
+        factorsEl.innerHTML = '';
+        data.factors.forEach(function(f) {
+          var span = document.createElement('span');
+          span.className = 'factor-tag';
+          span.textContent = f;
+          factorsEl.appendChild(span);
+        });
 
         document.getElementById('reasonText').textContent = data.reason;
         document.getElementById('adviceText').textContent = data.advice;
